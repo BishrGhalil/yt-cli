@@ -2,7 +2,8 @@
 # search videos and playlists on youtube and play them in mpv, without an API 
 # usage:
 # yt					asks for input in stdin, prompts using fzf
-# yt search query		takes input from the passed arg, prompts using fzf
+# yt -u	<video-url>			stream from a url
+# yt search query			takes input from the passed arg, prompts using fzf
 # yt -r					takes input and prompts using rofi
 
 promptcmd="fzf --with-nth=2..-1"
@@ -15,14 +16,66 @@ formats="0. audio only\n \
 6. 1080px\n \
 exit"
 
+help_msg="Usage: yt-cli [option]\n \
+    -h	--help\tprints this help message\n \
+    -u	--url <url>\tstreams from a url\n \
+    -r \t\tprompts using rofi\n \
+"
+# prompt to choose the video quality
+video_format(){
+
+	tmp_choice=$(
+	    echo -e "$formats" | \
+	    $promptcmd | \
+	    awk '{ print $1 }' | \
+	    sed 's/\.//g'
+	)
+
+	case $tmp_choice in
+	    0)
+		ytdl_id="251";;
+	    1)
+		ytdl_id="160+251";;
+	    2)
+		ytdl_id="133+251";;
+	    3)
+		ytdl_id="134+251";;
+	    4)
+		ytdl_id="135+251";;
+	    5)
+		ytdl_id="136+251";;
+	    6)
+		ytdl_id="137+251";;
+	    exit)
+		exit 0;;
+	esac
+}
+
 if [ -z "$*" ]; then 
 	echo -n "Search: "
 	read -r query
 else
 	case "$1" in
-		-r) query=$(rofi -dmenu -p "Search: ")
-			promptcmd="rofi -dmenu -no-custom -p Video:";;
-		*) query="$*";;
+		-h|--help)
+		    echo -e $help_msg
+		    exit;;
+		-r)
+		    query=$(rofi -dmenu -p "Search: ")
+		    promptcmd="rofi -dmenu -no-custom -p Video:";;
+		-u|--url)
+		    if [[ $# < 2 ]]
+		    then
+			echo "Please enter a valid url"
+			echo -e $help_msg
+			exit -1
+		    fi
+		    URL=$2
+		    video_format
+		    flags="--ytdl-format=$ytdl_id"
+		    mpv "$flags" "$URL"
+		    exit;;
+		*)
+		    query="$*";;
 	esac
 fi
 if [ -z "$query" ]; then exit; fi 
@@ -33,6 +86,7 @@ query=$(sed \
 	-e 's|&|%26|g'\
 	-e 's| |+|g'\
 	<<< "$query")
+
 # fetch the results with the $query 
 response=$(curl -s "https://www.youtube.com/results?search_query=$query")
 vgrep='"videoRenderer":{"videoId":"\K.{11}".+?"text":".+?[^\\](?=")'
@@ -53,6 +107,7 @@ playlistids=$(
 	sed 's|\\\"|“|g' | \
 	awk -F\" '{ print $1 "\t(playlist) " $NF }'
 )
+
 # if there are playlists, append them to list
 [ -n "$playlistids" ] && ids="$playlistids\n"
 # if there are videos, append them to list
@@ -67,35 +122,8 @@ while true; do
 		$promptcmd | \
 		cut -d'	' -f1
 	)
-	# Video quality
-	video_quality=$(
-	    echo -e "$formats" | \
-	    fzf | \
-	    awk '{ print $1 }' | \
-	    sed 's/\.//g'
-	)
-
-	case $video_quality in
-	    0)
-		video_quality=251;;
-	    1)
-		video_quality=160+251;;
-	    2)
-		video_quality=133+251;;
-	    3)
-		video_quality=134+251;;
-	    4)
-		video_quality=135+251;;
-	    5)
-		video_quality=136+251;;
-	    6)
-		video_quality=137+251;;
-	    exit)
-		break
-		exit 0;;
-	esac
-
-	flags="--ytdl-format=$video_quality"
+	video_format
+	flags="--ytdl-format=$ytdl_id"
 
 	case $id in
 		# 11 digit id = video

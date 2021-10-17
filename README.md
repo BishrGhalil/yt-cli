@@ -1,5 +1,6 @@
 # YouTube-CLI-Scripts
-Bash scripts for watching/listening to YouTube.
+A Bash script for watching/listening to YouTube.
+Choose the video, the quality and you are ready to go.
 Designed for Linux, probably will work on macOS/BSD.
 
 ## Requirements:
@@ -8,23 +9,25 @@ Designed for Linux, probably will work on macOS/BSD.
 - fzf
 - (optional) rofi
 
-yt.sh is for videos, yta.sh is for audio only.
-
-Usage:
-`yt.sh` > search thing
-
-or
-
-
-`yt.sh s cool search term`
-
-
-same goes for `yta.sh`.
-
+## Usage:
+```bash
+yt-cli
+```
+#### Options
+yt-cli [option]
+-h	--help		prints this help message
+-u	--url <url>	streams from a url
+-r 			prompts using rofi
 
 ## Wanna install these?
 
 ```bash
-sudo cp yt.sh /usr/bin/yt
-sudo cp yta.sh /usr/bin/yta
+git clone https://github.com/BishrGhalil/YouTube-CLI-Scripts.git
+cd YouTube-CLI-Scripts
+sudo make
+```
+
+## Uninstall
+```bash
+sudo make uninstall
 ```
