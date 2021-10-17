@@ -77,7 +77,7 @@ while true; do
 
 	case $video_quality in
 	    0)
-		video_quality=251;;
+		video_quality="--no-video";;
 	    1)
 		video_quality=160+251;;
 	    2)
