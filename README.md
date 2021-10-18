@@ -13,7 +13,7 @@ Search for a video, Choose the quality, And You are ready to go.
 
 ## Usage:
 ```bash
-yt-cli
+yt-cli <search-query>
 ```
 #### Options
 ```
