@@ -1,7 +1,6 @@
 # YouTube-CLI-Scripts
 A Bash script for watching/listening to YouTube.
-Choose the video, the quality and you are ready to go.
-Designed for Linux, probably will work on macOS/BSD.
+Search for a video, Choose the quality, and You are ready to go.
 
 ## Requirements:
 - bash
