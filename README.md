@@ -17,7 +17,7 @@ yt-cli <search-query>
 ```
 #### Options
 ```
-yt-cli [option]
+yt-cli [<options>] [<argument> ...]
 -h	--help		prints this help message
 -u	--url <url>	streams from a url
 -r 			prompts using rofi

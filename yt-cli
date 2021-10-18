@@ -24,7 +24,7 @@ formats="0. audio only\n \
 6. 1080px\n \
 exit"
 
-help_msg="Usage: yt-cli [option]\n \
+help_msg="Usage: yt-cli [<options>] [<arguments> ...]\n \
     -h	--help\tprints this help message\n \
     -u	--url <url>\tstreams from a url\n \
     -r	--rofi\tprompts using rofi\n \
