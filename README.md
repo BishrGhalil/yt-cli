@@ -1,7 +1,8 @@
 # yt-cli
 A Bash script for watching/listening to YouTube.
 Search for a video, Choose the quality, And You are ready to go.
-Forked from [ThatOneCalculator/YouTube-CLI-Scripts](https://github.com/ThatOneCalculator/YouTube-CLI-Scripts).
+
+> Forked from [ThatOneCalculator/YouTube-CLI-Scripts](https://github.com/ThatOneCalculator/YouTube-CLI-Scripts).
 
 ## Requirements:
 - bash
@@ -15,10 +16,12 @@ Forked from [ThatOneCalculator/YouTube-CLI-Scripts](https://github.com/ThatOneCa
 yt-cli
 ```
 #### Options
+```
 yt-cli [option]
 -h	--help		prints this help message
 -u	--url <url>	streams from a url
 -r 			prompts using rofi
+```
 
 ## Install
 
