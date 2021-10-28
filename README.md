@@ -11,18 +11,18 @@ Search for a video, Choose the quality, And You are ready to go.
 - [fzf](https://github.com/junegunn/fzf)
 - (optional) [rofi](https://github.com/davatorium/rofi)
 
-## Usage:
-```bash
-yt-cli <search-query>
+## Help:
 ```
-#### Options
+Usage: yt-cli [OPTION...] [COMMAND]...
+Options:
+  -u="url", --url="url"  Uses this url
+  -d, --download         Download the video
+  -r, --rofi	 	 Takes input and prompts using rofi
+  -m, --dmenu	 	 Takes input and prompts using dmenu
+Commands:
+  -h, --help             Displays this help and exists
+  -v, --version          Displays output version and exists
 ```
-yt-cli [<options>] [<argument> ...]
--h	--help		prints this help message
--u	--url <url>	streams from a url
--r 			prompts using rofi
-```
-
 ## Install
 
 ```bash
