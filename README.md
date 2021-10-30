@@ -10,6 +10,7 @@ Search for a video, Choose the quality, And You are ready to go.
 - [youtube dl](https://github.com/ytdl-org/youtube-dl)
 - [fzf](https://github.com/junegunn/fzf)
 - (optional) [rofi](https://github.com/davatorium/rofi)
+- (optional) [dmenu](https://dwm.suckless.org/)
 
 ## Help:
 ```
